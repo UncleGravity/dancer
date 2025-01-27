@@ -30,7 +30,7 @@ def switch_tabs():
                 current_time = datetime.now().strftime('%I:%M:%S %p')
                 print(f"Outside operating hours ({current_time}). Waiting...")
             
-            # Wait for 5 seconds before the next check
+            # Wait for 30 seconds before the next check
             time.sleep(30)
             
     except KeyboardInterrupt:
