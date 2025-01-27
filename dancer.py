@@ -5,11 +5,10 @@ import subprocess
 from datetime import datetime, time as dt_time
 
 def is_work_hours():
-    return True
-    # current_time = datetime.now().time()
-    # start_time = dt_time(9, 0)  # 9:00 AM
-    # end_time = dt_time(17, 30)  # 5:30 PM
-    # return start_time <= current_time <= end_time
+    current_time = datetime.now().time()
+    start_time = dt_time(9, 0)  # 9:00 AM
+    end_time = dt_time(18, 00)  # 6:00 PM
+    return start_time <= current_time <= end_time
 
 def run_wlrctl_command(command):
     try:
@@ -32,7 +31,7 @@ def switch_tabs():
                 print(f"Outside work hours ({current_time}). Waiting...")
             
             # Wait for 5 seconds before the next check
-            time.sleep(5)
+            time.sleep(30)
             
     except KeyboardInterrupt:
         print("\nScript terminated by user")
@@ -40,6 +39,6 @@ def switch_tabs():
 
 if __name__ == "__main__":
     print("Tab switcher started. Press Ctrl+C to exit.")
-    print("Operating hours: 9:00 AM to 5:30 PM")
+    print("Operating hours: 9:00 AM to 6:00 PM")
     print("Will switch tabs every 5 seconds during operating hours")
     switch_tabs()
