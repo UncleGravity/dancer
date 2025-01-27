@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Input Detector</title>
+<style>
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+#status {
+  font-size: 28px;
+  font-weight: bold;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#log {
+  width: 80%;
+  max-width: 600px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#log div {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+#log div:first-child {
+  color: #2196F3;
+}
+</style>
+</head>
+<body>
+
+<div id="status">Mouse Not Moving</div>
+<div id="log" style="margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
+
+<script>
+const statusDiv = document.getElementById('status');
+const logDiv = document.getElementById('log');
+let isMouseMoving = false;
+let timeoutId;
+
+// Add keyboard event listener
+document.addEventListener('keydown', (event) => {
+    const timestamp = new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 3 });
+    const logEntry = document.createElement('div');
+    logEntry.textContent = `${timestamp} - Key pressed: ${event.key}`;
+    logDiv.insertBefore(logEntry, logDiv.firstChild);
+});
+
+document.addEventListener('mousemove', (event) => {
+  if (!isMouseMoving) {  // Only log when transitioning from not moving to moving
+    const timestamp = new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 3 });
+    const logEntry = document.createElement('div');
+    logEntry.textContent = `${timestamp} - Movement started at (${event.clientX}, ${event.clientY})`;
+    logDiv.insertBefore(logEntry, logDiv.firstChild);
+  }
+  
+  isMouseMoving = true;
+  statusDiv.textContent = 'Mouse Moving';
+
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => {
+    isMouseMoving = false;
+    statusDiv.textContent = 'Mouse Not Moving';
+  }, 500);
+});
+</script>
+
+</body>
+</html>
