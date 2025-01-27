@@ -28,7 +28,7 @@ def switch_tabs():
                 print(f"Ctrl+Tab sent in Chromium at {datetime.now().strftime('%I:%M:%S %p')}")
             else:
                 current_time = datetime.now().strftime('%I:%M:%S %p')
-                print(f"Outside work hours ({current_time}). Waiting...")
+                print(f"Outside operating hours ({current_time}). Waiting...")
             
             # Wait for 5 seconds before the next check
             time.sleep(30)
@@ -40,5 +40,5 @@ def switch_tabs():
 if __name__ == "__main__":
     print("Tab switcher started. Press Ctrl+C to exit.")
     print("Operating hours: 9:00 AM to 6:00 PM")
-    print("Will switch tabs every 5 seconds during operating hours")
+    print("Will switch tabs every 30 seconds during operating hours")
     switch_tabs()
