@@ -26,9 +26,9 @@ def switch_tabs():
                 # Focus Chromium and send Ctrl+Tab
                 run_wlrctl_command(['wlrctl', 'window', 'focus', 'chromium'])
                 run_wlrctl_command(['wlrctl', 'keyboard', 'type', '\t', 'modifiers', 'CTRL'])
-                print(f"Ctrl+Tab sent in Chromium at {datetime.now().strftime('%H:%M:%S')}")
+                print(f"Ctrl+Tab sent in Chromium at {datetime.now().strftime('%I:%M:%S %p')}")
             else:
-                current_time = datetime.now().strftime('%H:%M:%S')
+                current_time = datetime.now().strftime('%I:%M:%S %p')
                 print(f"Outside work hours ({current_time}). Waiting...")
             
             # Wait for 5 seconds before the next check
